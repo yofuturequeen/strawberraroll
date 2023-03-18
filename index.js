@@ -166,6 +166,7 @@ function endGame(roll, poison) {
 function mousePressed(){
     if (screen==0) {
   	screen=1;
+    velocity=-10;
     themeSound.loop();
   } else if(screen==2) {
   	screen=0;
