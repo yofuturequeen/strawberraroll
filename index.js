@@ -1,43 +1,3 @@
-/*
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { doc, getFirestore, collection, addDoc, getDocs, query, where, orderBy, getDocFromCache, limit} from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDOPtIOhbV79fG5x24u8V1HuQSVpc212AM",
-  authDomain: "strawberraroll.firebaseapp.com",
-  projectId: "strawberraroll",
-  storageBucket: "strawberraroll.appspot.com",
-  messagingSenderId: "754781073444",
-  appId: "1:754781073444:web:e59f0b805a70fdc256e8b1",
-  measurementId: "G-TR9GSJC5F4"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-async function sendScore(username) {
-    // console.log("in send score")
-    // let username = id('UserName').value;
-    // console.log(username)
-    try {
-        const docRef = await addDoc(collection(db, "players"), {
-          username: username,
-          score: score,
-        });
-        console.log("Document written with ID: ", docRef.id);
-        let btn = id("submit-button");
-        btn.disabled=true;
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
-}
-*/
 let roll, clouds, strawberry, poison, flour, cake;
 let rollImg, cloudsImg, strawberryImg, poisonImg, flourImg, cakeImg;
 let gameFont, regFont;
@@ -51,30 +11,6 @@ let score = 0;
 let screen = 0;
 let velocity = -10;
 
-/*function createLi(name, score){
-    let li = document.createElement("li");
-    // creates HTML ordered list for leaderboard
-    // TODO: STYLE
-    li.innerHTML = name + " : " + score;
-    return li;
-}
-
-const id = (name) => {
-    return document.getElementById(name);
-}
-
-window.addEventListener('load',() => {
-    screen == 2;
-    id("submit").addEventListener('submit', (e) => {
-        e.preventDefault()
-        
-        let username = id('user-name').value;
-        // console.log(username);
-        sendScore(username)
-
-    })
-})
-*/
 function preload() {
     rollImg = loadImage("images/roll.png");
     cloudsImg = loadImage("images/clouds.png");
@@ -98,7 +34,7 @@ function setup() {
   poisons = new Group();
   flours = new Group();
   
-  roll = new Sprite();
+  roll = new Sprite(200, 400);
   roll.addImg(rollImg);
   roll.scale = 1.5;
   
@@ -169,6 +105,7 @@ function playGame() {
 
 // game over screen + click to restart
 function gameOver() {
+    screen=2;
   animation(cakeVid, windowWidth/2 + 100, windowHeight/2 + 60);
   cakeVid.play();
   textSize(50);
@@ -180,6 +117,7 @@ function gameOver() {
   textSize(20);
   text("nice cake ;) click to restart", windowWidth/2, windowHeight/2 + 200);
   //getScore();
+  //leaderboardDiv.classList.remove('hidden');
 }
 
 function createStrawberry() {
@@ -233,23 +171,3 @@ function mousePressed(){
   	screen=0;
   }
 }
-/*
-async function getScore() {
-    const q = query(collection(db, "players"), orderBy("score", "desc"), limit(8));
-    const querySnapshot = await getDocs(q);
-    const data = {allScores: []};
-
-    querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-        data.allScores.push(doc.data());
-        // console.log(doc.data());
-    });
-    // console.log(data);
-    // return data;
-    let leaderboard = id("LB-list");
-    data.allScores.forEach(({username, score}) => {
-        let li = createLi(username, score);
-        leaderboard.appendChild(li);
-    });
-}
-*/
